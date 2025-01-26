@@ -1,0 +1,32 @@
+*,
+**::after,
+**::before {
+    box-sizing: inherit;
+    margin: 0;
+    padding: 0;
+}
+
+
+
+
+
+.post-img {
+    width: 295px;
+    height: 380px;
+    position: relative;
+
+}
+
+.image-cont {
+    width: 295px;
+    height: 380px;
+    position: relative;
+}
+
+.card-all {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+
+
+    gap: 24px;
+}
