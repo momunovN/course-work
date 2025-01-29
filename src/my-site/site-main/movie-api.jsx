@@ -1,69 +1,105 @@
 import APiJson from "../APi/movies_rus2.json";
 import { useState, useEffect } from "react";
+import Aside from "./aside"; // Импортируем новый компонент
+import MovieDetail from "./MovieDetail"; // Импортируем новый компонент для деталей фильма
+
+import "./index.scss";
 
 const MovieList = () => {
   const [filteredMovies, setFilteredMovies] = useState([]);
-  const [inputValue, setInputValue] = useState("");
+  const [selectedGenre, setSelectedGenre] = useState("Все Жанры");
+  const [selectedYear, setSelectedYear] = useState("Все");
+  const [visibleCount, setVisibleCount] = useState(12);
+  const [selectedMovie, setSelectedMovie] = useState(null); // Состояние для выбранного фильма
 
-  // Обработчик изменения ввода
-  const handleInputChange = (event) => {
-    setInputValue(event.target.value);
+  const handleGenreChange = (event) => {
+    setSelectedGenre(event.target.value);
+    setVisibleCount(12);
+  };
+
+  const handleYearChange = (event) => {
+    setSelectedYear(event.target.value);
+    setVisibleCount(12);
+  };
+
+  const handleShowMore = () => {
+    setVisibleCount((prevCount) => prevCount + 4);
   };
 
   useEffect(() => {
-    // Выводим все фильмы для отладки
-    console.log("All Movies:", APiJson);
-
-    // Фильтруем фильмы по жанру "Боевик" и году, указанному в inputValue
     const filtered = APiJson.filter((movie) => {
-      console.log("Checking movie:", movie); // Отладка: выводим каждый фильм
-      return movie.genre.includes("Боевик") && movie.year === inputValue; // Сравниваем строки
+      const isYearMatch = selectedYear === "Все" || movie.year === selectedYear;
+      const isGenreMatch =
+        selectedGenre === "Все Жанры" || movie.genre.includes(selectedGenre);
+      return isYearMatch && isGenreMatch;
     });
 
-    console.log("Input Value:", inputValue); // Отладка: выводим значение inputValue
-    console.log("Filtered Movies:", filtered); // Отладка: выводим отфильтрованные фильмы
-
     setFilteredMovies(filtered);
-  }, [inputValue]); // Add inputValue as a dependency
+  }, [selectedGenre, selectedYear]);
+
+  const genres = Array.from(
+    new Set(APiJson.flatMap((movie) => movie.genre.split(", ")))
+  )
+    .filter((genre) => genre.trim() !== "")
+    .concat("Все Жанры");
+
+  const years = Array.from(new Set(APiJson.map((movie) => movie.year)))
+    .sort((a, b) => b - a)
+    .concat("Все");
+
+  const handleMovieClick = (movie) => {
+    setSelectedMovie(movie); // Устанавливаем выбранный фильм
+  };
+
+  const handleCloseDetail = () => {
+    setSelectedMovie(null); // Закрываем детали фильма
+  };
 
   return (
-    <div>
-      <h1>Фильмы по жанру "Боевик" По годам</h1>
-
-      <input
-        type="number"
-        value={inputValue}
-        onChange={handleInputChange}
-        placeholder="Введите год" // Optional placeholder for better UX
+    <div className="aside-movies">
+      <Aside
+        selectedGenre={selectedGenre}
+        onGenreChange={handleGenreChange}
+        selectedYear={selectedYear}
+        onYearChange={handleYearChange}
+        genres={genres}
+        years={years}
       />
-      <select id="year" value={inputValue}
-        onChange={handleInputChange}  >
-        <option value="2020">2020</option>
-        <option value="2021">2021</option>
-        <option value="2022">2022</option>
-        <option value="2023">2023</option>
-        <option value="2024">2024</option>
-      </select>
+      <div className="movies-item">
+        <h1>Билеты на кино</h1>
+        <div className="all-content">
+          {filteredMovies.slice(0, visibleCount).length > 0 ? (
+            filteredMovies.slice(0, visibleCount).map((movie) => (
+              <div className="movie-poster-info" key={movie.title}>
+                <div className="image-cont">
+                  <img
+                    className="poster-image"
+                    src={movie.poster}
+                    alt={movie.title}
+                  />
+                </div>
 
-      <div style={{ display: "flex", flexWrap: "wrap" }}>
-        {filteredMovies.length > 0 ? (
-          filteredMovies.map((movie) => (
-            <div key={movie.id} style={{ margin: "10px", width: "200px" }}>
-              <img
-                src={movie.poster}
-                alt={movie.title}
-                style={{ width: "100%" }}
-              />
-              <h2>{movie.title}</h2>
-              <p>{movie.year}</p>
-              <p>{movie.plot}</p>
-              <p>{movie.genre}</p> {/* Если genre - строка, просто выводим */}
-            </div>
-          ))
-        ) : (
-          <p>Фильмы не найдены</p> // Сообщение, если фильмы не найдены
+                <div className="movie-info">
+                  <h2 className="movie-title">{movie.title}</h2>
+                  <p>{movie.year}</p>
+                  <p>{movie.genre}</p>
+                  <button onClick={() => handleMovieClick(movie)}>Купить билет</button>
+                </div>
+              </div>
+            ))
+          ) : (
+            <p>Фильмы не найдены</p>
+          )}
+        </div>
+        {filteredMovies.length > visibleCount && (
+          <button onClick={handleShowMore} style={{ marginTop: "20px" }}>
+            Показать еще
+          </button>
         )}
       </div>
+      {selectedMovie && ( // Если выбран фильм, показываем детали
+        <MovieDetail movie={selectedMovie} onClose={handleCloseDetail} />
+      )}
     </div>
   );
 };

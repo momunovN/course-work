@@ -1,3 +1,4 @@
+@import url(../all-main.scss);
 
 
 .header {
@@ -54,4 +55,136 @@
             word-wrap: break-word;
         }
     }
+}
+
+.aside-movies {
+    display: flex;
+    gap: 40px;
+}
+
+
+.aside {
+    width: 260px;
+    height: 344px;
+    display: flex;
+    flex-direction: column;
+    gap: 54px;
+
+
+    .genre {
+        width: 260px;
+        height: 40px;
+        border-radius: 8px;
+        padding-left: 16px;
+        padding-right: 16px;
+
+        padding: 10px;
+        background: url('../images/strelka.svg') no-repeat right 10px center;
+        appearance: none;
+
+        background-size: 10px;
+        background-color: #F2F2F2;
+
+        outline: none;
+
+    }
+
+    .genre-text,
+    .genre,
+    .year-text,
+    .select-year {
+
+        color: black;
+        font-size: 15px;
+        font-family: Graphik Kinopoisk LC Web;
+        font-weight: 400;
+        line-height: 18px;
+        word-wrap: break-word;
+
+    }
+
+
+    .genre-select {
+        display: flex;
+        flex-direction: column;
+        gap: 13px;
+    }
+
+
+    //Фильтр ГОД
+
+
+    .filter-year {
+        display: flex;
+        flex-direction: column;
+        gap: 13px;
+    }
+
+    .select-year {
+        width: 260px;
+        height: 40px;
+        border-radius: 8px;
+        padding-left: 16px;
+        padding-right: 16px;
+
+
+        padding: 10px;
+        background: url('../images/strelka.svg') no-repeat right 10px center;
+        appearance: none;
+
+        background-size: 10px;
+        background-color: #F2F2F2;
+
+        outline: none;
+    }
+
+}
+
+.movies-item {
+    width: 900px;
+    padding-left: 20px;
+    padding-right: 20px;
+
+    .image-cont {
+        width: 72px;
+        height: 108px;
+        overflow: hidden;
+
+        .poster-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+
+        }
+    }
+
+
+    .movie-poster-info {
+        display: flex;
+        gap: 20px;
+        align-items: start;
+    }
+
+
+    .all-content {
+        display: flex;
+        flex-direction: column;
+        flex-wrap: nowrap;
+        gap: 48px;
+    }
+
+    .movie-info {
+
+        .movie-title {
+            width: 372px;
+            height: 21.60px;
+            color: black;
+            font-size: 18px;
+            font-family: Graphik Kinopoisk LC Web;
+            font-weight: 400;
+            line-height: 22px;
+            word-wrap: break-word;
+        }
+    }
+
 }

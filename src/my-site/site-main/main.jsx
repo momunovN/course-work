@@ -1,9 +1,6 @@
 import React from "react";
 // import MovieList from "./movie";
 import MovieList from "./movie-api";
-import MovieLists from "./movie-sort";
-
-
 
 import "./index.scss";
 import "../all-main.scss";
@@ -37,10 +34,10 @@ const Header = () => {
 const Theart = () => {
   return (
     <div className="Theart">
-      <Header />
-      <MovieList />
-      <MovieLists />
-
+        <Header />
+      <div className="constainer">
+        <MovieList />
+      </div>
     </div>
   );
 };

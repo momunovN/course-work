@@ -7,13 +7,13 @@ const MovieList = () => {
 
   useEffect(() => {
     // Выводим все фильмы для отладки
-    console.log("All Movies:", APiJson);
+
 
     // Перемешиваем массив фильмов
-    const shuffledMovies = APiJson.sort(() => Math.random() - 0.5);
+    const shuffledMovies = APiJson.sort(() => Math.random() - 0.1);
 
     // Ограничиваем количество фильмов до 20
-    const selectedMovies = shuffledMovies.slice(0, 20);
+    const selectedMovies = shuffledMovies.slice(0, 12);
 
     // Сортируем фильмы в зависимости от выбранного порядка
     const sortedMovies = selectedMovies.sort((a, b) => {
@@ -52,7 +52,7 @@ const MovieList = () => {
               />
               <h2>{movie.title}</h2>
               <p>{movie.year}</p>
-              <p>{movie.plot}</p>
+            {/* <p>{movie.plot}</p> */}
               <p>{movie.genre}</p> {/* Если genre - строка, просто выводим */}
             </div>
           ))

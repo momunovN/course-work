@@ -1,0 +1,26 @@
+/* MovieDetail.scss */
+.movie-detail-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.8); /* Полупрозрачный фон */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000; /* Убедитесь, что модальное окно поверх остальных элементов */
+  }
+  
+  .movie-detail {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    width: 80%; /* Ширина модального окна */
+    max-width: 600px; /* Максимальная ширина */
+    text-align: center;
+  }
+  
+  .purchase-message {
+    margin-top: 20px;
+  }

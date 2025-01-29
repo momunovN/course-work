@@ -8,6 +8,11 @@
 
 
 
+p,h1, h2, h3, h4, h5, h6 {
+    padding: 0;
+    margin: 0;
+}
+
 
 
 .post-img {
@@ -29,4 +34,20 @@
 
 
     gap: 24px;
+}
+
+
+.constainer{
+    max-width: 1920px;
+    padding-left: 100px;
+    padding-right: 100px;
+    margin: 0 auto;
+}
+
+
+@font-face {
+    font-family: Graphik Kinopoisk LC Web;
+    src: url('.//FONT/graphiklcweb_medium.ttf');
+    font-weight: 400;
+    line-height: 18px;
 }
