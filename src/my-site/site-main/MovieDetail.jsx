@@ -18,7 +18,7 @@ const MovieDetail = ({ movie, onClose }) => {
             <p>Приятного просмотра!</p>
             <button onClick={onClose}>Закрыть</button>
           </div>
-        ) : (
+        ) : ( 
           <>
           <img src={movie.poster} alt="" />
             <h2>{movie.title}</h2>
