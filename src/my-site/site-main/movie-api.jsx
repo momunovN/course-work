@@ -3,6 +3,9 @@ import { useState, useEffect } from "react";
 import Aside from "./aside"; // Импортируем новый компонент
 import MovieDetail from "./MovieDetail"; // Импортируем новый компонент для деталей фильма
 
+import ticket from "../images/ticket.svg"
+import Watch from "../images/I'll-watch.svg"
+
 import "./index.scss";
 
 const MovieList = () => {
@@ -66,33 +69,66 @@ const MovieList = () => {
         years={years}
       />
       <div className="movies-item">
-        <h1>Билеты на кино</h1>
+        <div className="title-all">
+
+
+          <div>
+
+
+            <h1 className="title-movie-item">Билеты на кино</h1>
+            <h5 className="title-movie-item2">Новинки, ожидаемые премьеры, хиты проката и другие фильмы, которые сейчас идут в кино.</h5>
+          </div>
+
+          <button className="my-tickets">
+            <img src={ticket} alt="" className="img-my-ticket" style={{ fill: 'currentColor' }}/>
+          Мои билеты
+          </button>
+        </div>
         <div className="all-content">
           {filteredMovies.slice(0, visibleCount).length > 0 ? (
             filteredMovies.slice(0, visibleCount).map((movie) => (
               <div className="movie-poster-info" key={movie.title}>
-                <div className="image-cont">
-                  <img
-                    className="poster-image"
-                    src={movie.poster}
-                    alt={movie.title}
-                  />
+                <div className="movie-poster-item">
+
+
+                  <div className="image-cont">
+                    <img
+                      className="poster-image"
+                      src={movie.poster}
+                      alt={movie.title}
+                    />
+                  </div>
+
+                  <div className="movie-info">
+                    <div>
+
+
+                      <h2 className="movie-title">{movie.title}</h2>
+                      <p>{movie.year}</p>
+                      <p>{movie.genre}</p>
+                    </div>
+                    <button onClick={() => handleMovieClick(movie)} className="btn-buy " >
+                      <img src={ticket} alt="" className="img-buy-ticket"/>
+                      Купить билет</button>
+                  </div>
                 </div>
 
-                <div className="movie-info">
-                  <h2 className="movie-title">{movie.title}</h2>
-                  <p>{movie.year}</p>
-                  <p>{movie.genre}</p>
-                  <button onClick={() => handleMovieClick(movie)}>Купить билет</button>
-                </div>
+
+                <button className="movie-watch">
+
+                  <img src={Watch} alt="" className="img-watch" />
+                  Буду смотреть
+                </button>
               </div>
+
+
             ))
           ) : (
             <p>Фильмы не найдены</p>
           )}
         </div>
         {filteredMovies.length > visibleCount && (
-          <button onClick={handleShowMore} style={{ marginTop: "20px" }}>
+          <button onClick={handleShowMore} style={{ marginTop: "20px", color: "black" }}>
             Показать еще
           </button>
         )}
