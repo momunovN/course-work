@@ -1,9 +1,6 @@
-import React from "react";
 // import MovieList from "./movie";
-// import MovieList from "./movie-api";
+import MoviesByGenre from "../musor/kinoapi";
 
-import MovieList from "../musor/movieList";
-import MoviesByGenre from "../musor/MoviesByGenre";
 import "./index.scss";
 import "../all-main.scss";
 
@@ -34,16 +31,12 @@ const Header = () => {
 };
 
 const Theart = () => {
+  const filmId = 5304486;
   return (
     <div className="Theart">
-      <Header />
+        <Header />
       <div className="constainer">
-      <MovieList/>
-
-        <MoviesByGenre
-          genre="криминал"
-          apiKey="TMGNH2Y-66RMEVW-J3Q0Y7D-WEMHYKE"
-        />
+      <MoviesByGenre genre="криминал" apiKey="TMGNH2Y-66RMEVW-J3Q0Y7D-WEMHYKE" />
       </div>
     </div>
   );

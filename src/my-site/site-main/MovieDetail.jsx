@@ -34,4 +34,7 @@ const MovieDetail = ({ movie, onClose }) => {
   );
 };
 
+
+
+
 export default MovieDetail;
